@@ -3,8 +3,9 @@ import { IUserRepository } from "@users/domain/UserRepository"
 import { ConflictError } from "@shared/error/conflictError"
 import { NotFoundError } from "@shared/error/notFoundError"
 import { exceptionType } from "@shared/enum/exceptionType"
+import { IUserService } from "./types"
 
-export class UserService {
+export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) { }
 
   async createUser(user: User): Promise<User> {

@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
 
 import { User } from "@users/domain/User"
-import { UserService } from "@users/application/UserService"
 import { ConflictError } from '@shared/error/conflictError'
 import { exceptionType } from '@shared/enum/exceptionType'
 import { isValidCpf } from '@shared/utils/isValidCpf'
 import { statusCode } from '@shared/enum/statusCode'
+import { IUserService } from './types'
 
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: IUserService) { }
 
   async createUser(request: Request, response: Response): Promise<Response> {
     const { cpf, name } = request.body
