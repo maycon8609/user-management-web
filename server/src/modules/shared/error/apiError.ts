@@ -11,24 +11,3 @@ export class ApiError extends Error {
     this.type = type
   }
 }
-
-export class BadRequestError extends ApiError {
-  constructor(message: string, type?: string) {
-    const errorType = type ?? exceptionType.BAD_REQUEST_EXCEPTION
-    super(message, statusCode.BAD_REQUEST, errorType)
-  }
-}
-
-export class ConflictError extends ApiError {
-  constructor(message: string, type?: string) {
-    const errorType = type ?? exceptionType.CONFLICT_EXCEPTION
-    super(message, statusCode.CONFLICT, errorType)
-  }
-}
-
-export class NotFoundError extends ApiError {
-  constructor(message: string, type?: string) {
-    const errorType = type ?? exceptionType.NOT_FOUND_EXCEPTION
-    super(message, statusCode.NOT_FOND, errorType)
-  }
-}

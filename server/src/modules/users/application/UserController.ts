@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { User } from "../domain/User"
 import { UserService } from "./UserService"
-import { ConflictError } from '../../shared/error/apiError'
+import { ConflictError } from '../../shared/error/conflictError'
 import { exceptionType } from '../../shared/enum/exceptionType'
 import { isValidCpf } from '../../shared/utils/isValidCpf'
 import { statusCode } from '../../shared/enum/statusCode'
