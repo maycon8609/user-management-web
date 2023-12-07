@@ -9,7 +9,7 @@ export class UserService {
   async createUser(user: User): Promise<User> {
     const existentUser = await this.userRepository.findByCpf(user.cpf)
 
-    if (!existentUser) {
+    if (existentUser) {
       throw new ConflictError(
         'This cpf is already in use. Please check your details.',
         exceptionType.EXISTS_CPF_EXCEPTION

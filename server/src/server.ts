@@ -5,7 +5,7 @@ import { useRouter } from './userModule'
 import { errorMiddleware } from './middlewares/errorMiddleware'
 
 const app = express()
-const PORT = 3333
+const PORT = 3000
 
 app.use(express.json())
 app.use("/", useRouter.router)
