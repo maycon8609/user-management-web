@@ -1,4 +1,4 @@
-import { User } from './User'
+import { User } from '@users/domain/User'
 
 export interface IUserRepository {
   delete(cpf: string): void

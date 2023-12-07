@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
-import { User } from "../domain/User"
-import { UserService } from "./UserService"
-import { ConflictError } from '../../shared/error/conflictError'
-import { exceptionType } from '../../shared/enum/exceptionType'
-import { isValidCpf } from '../../shared/utils/isValidCpf'
-import { statusCode } from '../../shared/enum/statusCode'
+import { User } from "@users/domain/User"
+import { UserService } from "@users/application/UserService"
+import { ConflictError } from '@shared/error/conflictError'
+import { exceptionType } from '@shared/enum/exceptionType'
+import { isValidCpf } from '@shared/utils/isValidCpf'
+import { statusCode } from '@shared/enum/statusCode'
 
 export class UserController {
   constructor(private readonly userService: UserService) { }

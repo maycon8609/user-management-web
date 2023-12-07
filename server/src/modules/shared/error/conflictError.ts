@@ -1,6 +1,6 @@
-import { ApiError } from './apiError'
-import { exceptionType } from '../enum/exceptionType'
-import { statusCode } from '../enum/statusCode'
+import { ApiError } from '@shared/error/apiError'
+import { exceptionType } from '@shared/enum/exceptionType'
+import { statusCode } from '@shared/enum/statusCode'
 
 export class ConflictError extends ApiError {
   constructor(message: string, type?: string) {

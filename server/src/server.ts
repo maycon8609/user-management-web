@@ -1,8 +1,8 @@
 import 'express-async-errors'
 import express from 'express'
 
-import { errorMiddleware } from './modules/shared/middlewares/errorMiddleware'
-import { useRouter } from './modules/users/userModule'
+import { errorMiddleware } from '@shared/middlewares/errorMiddleware'
+import { useRouter } from '@users/userModule'
 
 const app = express()
 const PORT = 3000

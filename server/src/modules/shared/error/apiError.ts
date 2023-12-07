@@ -1,6 +1,3 @@
-import { exceptionType } from '../enum/exceptionType'
-import { statusCode } from '../enum/statusCode'
-
 export class ApiError extends Error {
   public readonly statusCode: number
   public readonly type: string

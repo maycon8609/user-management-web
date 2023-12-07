@@ -1,11 +1,11 @@
 export function isValidCpf(cpf: string): boolean {
-  cpf = cpf.replace(/\D/g, '')
+  let cpfData = cpf.replace(/\D/g, '')
 
-  if (cpf.length !== 11) {
+  if (cpfData.length !== 11) {
     return false
   }
 
-  if (/^(\d)\1+$/.test(cpf)) {
+  if (/^(\d)\1+$/.test(cpfData)) {
     return false
   }
 
@@ -13,7 +13,7 @@ export function isValidCpf(cpf: string): boolean {
   let remainder = 0
 
   for (let i = 1; i <= 9; i++) {
-    sum += parseInt(cpf[i - 1]) * (11 - i)
+    sum += parseInt(cpfData[i - 1]) * (11 - i)
   }
 
   remainder = (sum * 10) % 11
@@ -22,13 +22,13 @@ export function isValidCpf(cpf: string): boolean {
     remainder = 0
   }
 
-  if (remainder !== parseInt(cpf[9])) {
+  if (remainder !== parseInt(cpfData[9])) {
     return false
   }
 
   sum = 0
   for (let i = 1; i <= 10; i++) {
-    sum += parseInt(cpf[i - 1]) * (12 - i)
+    sum += parseInt(cpfData[i - 1]) * (12 - i)
   }
 
   remainder = (sum * 10) % 11
@@ -37,7 +37,7 @@ export function isValidCpf(cpf: string): boolean {
     remainder = 0
   }
 
-  if (remainder !== parseInt(cpf[10])) {
+  if (remainder !== parseInt(cpfData[10])) {
     return false
   }
 

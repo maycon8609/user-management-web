@@ -1,8 +1,8 @@
-import { User } from "../domain/User"
-import { IUserRepository } from "../domain/UserRepository"
-import { ConflictError } from "../../shared/error/conflictError"
-import { NotFoundError } from "../../shared/error/notFoundError"
-import { exceptionType } from "../../shared/enum/exceptionType"
+import { User } from "@users/domain/User"
+import { IUserRepository } from "@users/domain/UserRepository"
+import { ConflictError } from "@shared/error/conflictError"
+import { NotFoundError } from "@shared/error/notFoundError"
+import { exceptionType } from "@shared/enum/exceptionType"
 
 export class UserService {
   constructor(private readonly userRepository: IUserRepository) { }

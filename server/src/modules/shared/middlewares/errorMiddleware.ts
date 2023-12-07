@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express"
 
-import { ApiError } from "../error/apiError"
-import { statusCode as statusCodeEnum } from '../enum/statusCode'
-import { exceptionType } from "../enum/exceptionType";
+import { ApiError } from "@shared/error/apiError"
+import { statusCode as statusCodeEnum } from '@shared/enum/statusCode'
+import { exceptionType } from "@shared/enum/exceptionType"
 
 export const errorMiddleware = (
   error: Error & Partial<ApiError>,

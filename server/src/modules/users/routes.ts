@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { UserController } from './application/UserController'
+import { UserController } from '@users/application/UserController'
 
 export class UserRouter {
   public readonly router: Router

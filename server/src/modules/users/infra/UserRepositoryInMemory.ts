@@ -1,5 +1,5 @@
-import { User } from '../domain/User'
-import type { IUserRepository } from '../domain/UserRepository'
+import { User } from '@users/domain/User'
+import type { IUserRepository } from '@users/domain/UserRepository'
 
 export class UserRepositoryInMemory implements IUserRepository {
   private users: User[] = []
