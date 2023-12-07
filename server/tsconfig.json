@@ -16,7 +16,6 @@
     "noUnusedParameters": true,
     "outDir": "dist",
     "paths": {
-      "@modules/*": ["modules/*"],
       "@users/*": ["modules/users/*"],
       "@shared/*": ["modules/shared/*"]
     },
