@@ -1,14 +1,14 @@
-import { User } from "@users/domain/User"
-import { IUserRepository } from "@users/domain/UserRepository"
 import { ConflictError } from "@shared/error/conflictError"
-import { NotFoundError } from "@shared/error/notFoundError"
 import { exceptionType } from "@shared/enum/exceptionType"
-import { IUserService } from "./types"
+import { NotFoundError } from "@shared/error/notFoundError"
+import { User } from "@users/domain/User"
+import type { IUser, IUserRepository } from "@users/domain/types"
+import type { IUserService } from "./types"
 
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) { }
 
-  async createUser(user: User): Promise<User> {
+  async createUser(user: User): Promise<IUser> {
     const existentUser = await this.userRepository.findByCpf(user.cpf)
 
     if (existentUser) {
@@ -32,7 +32,7 @@ export class UserService implements IUserService {
       )
     }
 
-    this.userRepository.delete(cpf)
+    await this.userRepository.delete(cpf)
   }
 
   async findAllUser(): Promise<User[] | []> {
@@ -40,7 +40,7 @@ export class UserService implements IUserService {
     return listOfUser
   }
 
-  async findUserByCpf(cpf: string): Promise<User> {
+  async findUserByCpf(cpf: string): Promise<IUser> {
     const existentUser = await this.userRepository.findByCpf(cpf)
 
     if (!existentUser) {
@@ -53,7 +53,7 @@ export class UserService implements IUserService {
     return existentUser
   }
 
-  async updateUser(user: User): Promise<User> {
+  async updateUser(user: User): Promise<IUser> {
     const existentUser = await this.userRepository.findByCpf(user.cpf)
 
     if (!existentUser) {

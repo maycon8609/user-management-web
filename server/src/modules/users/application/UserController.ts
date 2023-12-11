@@ -20,7 +20,7 @@ export class UserController {
       )
     }
 
-    const user = new User(cpf, name)
+    const user = new User({ cpf, name })
 
     const createUser = await this.userService.createUser(user)
     return response.status(statusCode.OK).json(createUser)
@@ -37,7 +37,7 @@ export class UserController {
     }
 
     await this.userService.deleteUser(cpf)
-    return response.status(statusCode.OK)
+    return response.status(statusCode.OK).send()
   }
 
   async findAllUser(_request: Request, response: Response): Promise<Response> {
@@ -70,7 +70,7 @@ export class UserController {
       )
     }
 
-    const user = new User(cpf, name)
+    const user = new User({ cpf, name })
     const updatedUser = await this.userService.updateUser(user)
     return response.status(statusCode.OK).json(updatedUser)
   }
