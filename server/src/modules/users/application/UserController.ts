@@ -1,26 +1,45 @@
 import { Request, Response } from 'express'
 
 import { User } from "@users/domain/User"
-import { ConflictError } from '@shared/error/conflictError'
 import { exceptionType } from '@shared/enum/exceptionType'
-import { isValidCpf } from '@shared/utils/isValidCpf'
 import { statusCode } from '@shared/enum/statusCode'
-import { IUserService } from './types'
+import { BadRequestError } from '@shared/error/badRequestError'
+import { ConflictError } from '@shared/error/conflictError'
+import { RequiredField } from '@shared/error/requiredField'
+import { isValidCpf } from '@shared/utils/isValidCpf'
+
+import type { IUserService } from './types'
+import { removeSpecialChars } from '@shared/utils/removeSpecialChars'
 
 export class UserController {
   constructor(private readonly userService: IUserService) { }
 
+  private async validateData(field: string): Promise<void> {
+    if (!field) {
+      throw new RequiredField('Mandatory fields were not provided.')
+    }
+
+    if (typeof field !== 'string') {
+      throw new BadRequestError('Invalid data format.')
+    }
+  }
+
   async createUser(request: Request, response: Response): Promise<Response> {
     const { cpf, name } = request.body
 
-    if (!isValidCpf(cpf)) {
+    await this.validateData(cpf)
+    await this.validateData(name)
+
+    const normalizedCpf = removeSpecialChars(cpf)
+
+    if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
         'Invalid CPF. Please check your details.',
         exceptionType.INVALID_CPF_EXCEPTION
       )
     }
 
-    const user = new User({ cpf, name })
+    const user = new User({ cpf: normalizedCpf, name })
 
     const createUser = await this.userService.createUser(user)
     return response.status(statusCode.OK).json(createUser)
@@ -29,14 +48,16 @@ export class UserController {
   async deleteUser(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params
 
-    if (!isValidCpf(cpf)) {
+    const normalizedCpf = removeSpecialChars(cpf)
+
+    if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
         'Invalid CPF. Please check your details.',
         exceptionType.INVALID_CPF_EXCEPTION
       )
     }
 
-    await this.userService.deleteUser(cpf)
+    await this.userService.deleteUser(normalizedCpf)
     return response.status(statusCode.OK).send()
   }
 
@@ -48,14 +69,16 @@ export class UserController {
   async findUserByCpf(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params
 
-    if (!isValidCpf(cpf)) {
+    const normalizedCpf = removeSpecialChars(cpf)
+
+    if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
         'Invalid cpf. Please check your details.',
         exceptionType.INVALID_CPF_EXCEPTION
       )
     }
 
-    const user = await this.userService.findUserByCpf(cpf)
+    const user = await this.userService.findUserByCpf(normalizedCpf)
     return response.status(statusCode.OK).json(user)
   }
 
@@ -63,16 +86,20 @@ export class UserController {
     const { cpf } = request.params
     const { name } = request.body
 
-    if (!isValidCpf(cpf)) {
+    await this.validateData(cpf)
+    await this.validateData(name)
+
+    const normalizedCpf = removeSpecialChars(cpf)
+
+    if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
         'Invalid CPF. Please check your details.',
         exceptionType.INVALID_CPF_EXCEPTION
       )
     }
 
-    const user = new User({ cpf, name })
+    const user = new User({ cpf: normalizedCpf, name })
     const updatedUser = await this.userService.updateUser(user)
     return response.status(statusCode.OK).json(updatedUser)
   }
-
 }
