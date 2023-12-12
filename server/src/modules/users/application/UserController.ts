@@ -7,9 +7,9 @@ import { BadRequestError } from '@shared/error/badRequestError'
 import { ConflictError } from '@shared/error/conflictError'
 import { RequiredField } from '@shared/error/requiredField'
 import { isValidCpf } from '@shared/utils/isValidCpf'
+import { returnNumericCharacters } from '@shared/utils/returnNumericCharacters'
 
 import type { IUserService } from './types'
-import { removeSpecialChars } from '@shared/utils/removeSpecialChars'
 
 export class UserController {
   constructor(private readonly userService: IUserService) { }
@@ -30,7 +30,7 @@ export class UserController {
     await this.validateData(cpf)
     await this.validateData(name)
 
-    const normalizedCpf = removeSpecialChars(cpf)
+    const normalizedCpf = returnNumericCharacters(cpf)
 
     if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
@@ -48,7 +48,7 @@ export class UserController {
   async deleteUser(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params
 
-    const normalizedCpf = removeSpecialChars(cpf)
+    const normalizedCpf = returnNumericCharacters(cpf)
 
     if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
@@ -69,7 +69,7 @@ export class UserController {
   async findUserByCpf(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params
 
-    const normalizedCpf = removeSpecialChars(cpf)
+    const normalizedCpf = returnNumericCharacters(cpf)
 
     if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
@@ -89,7 +89,7 @@ export class UserController {
     await this.validateData(cpf)
     await this.validateData(name)
 
-    const normalizedCpf = removeSpecialChars(cpf)
+    const normalizedCpf = returnNumericCharacters(cpf)
 
     if (!isValidCpf(normalizedCpf)) {
       throw new ConflictError(
