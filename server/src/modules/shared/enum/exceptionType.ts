@@ -5,5 +5,6 @@ export enum exceptionType {
   INTERNAL_SERVER_EXCEPTION = "InternalServerException",
   INVALID_CPF_EXCEPTION = "InvalidCpfException",
   NOT_FOUND_CPF_EXCEPTION = "NotFoundCpfException",
-  NOT_FOUND_EXCEPTION = "NotFoundException"
+  NOT_FOUND_EXCEPTION = "NotFoundException",
+  UNPROCESSABLE_CONTENT = "UnprocessableContent"
 }
