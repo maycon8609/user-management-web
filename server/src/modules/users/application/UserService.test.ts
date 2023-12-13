@@ -4,7 +4,7 @@ import { ConflictError } from '@shared/error/conflictError'
 import { NotFoundError } from '@shared/error/notFoundError'
 
 describe('[modules:users]: application -> UserService', () => {
-  describe('userService.createUser', () => {
+  describe('UserService.createUser', () => {
     it('should return a ConflictError exception when the cpf entered is already registered', async () => {
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
@@ -26,55 +26,7 @@ describe('[modules:users]: application -> UserService', () => {
     })
   })
 
-  describe('userService.deleteUser', () => {
-    it('should return a NotFoundError exception when the cpf entered is not registered', async () => {
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-      const userCpf = '03372977033'
-
-      await expect(() => userService.deleteUser(userCpf)).rejects.toBeInstanceOf(NotFoundError)
-    })
-
-    it('should delete a user when it exists', async () => {
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-
-      const userData = { cpf: '03372977033', name: 'John Doe' }
-      await userService.createUser(userData)
-      let users = await userService.findAllUser()
-
-      expect(users).toEqual([userData])
-
-      await userService.deleteUser(userData.cpf)
-      users = await userService.findAllUser()
-
-      expect(users).toEqual([])
-    })
-  })
-
-  describe('userService.findAllUser', () => {
-    it('should return an empty list when there are no registered users', async () => {
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-
-      let users = await userService.findAllUser()
-
-      expect(users).toEqual([])
-    })
-
-    it('should return an array with users when there are registered users', async () => {
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-
-      const userData = { cpf: '03372977033', name: 'John Doe' }
-      await userService.createUser(userData)
-      let users = await userService.findAllUser()
-
-      expect(users).toEqual([userData])
-    })
-  })
-
-  describe('userService.findUserByCpf', () => {
+  describe('UserService.findUserByCpf', () => {
     it('should return a NotFoundError exception when the cpf entered is not registered', async () => {
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
@@ -95,7 +47,29 @@ describe('[modules:users]: application -> UserService', () => {
     })
   })
 
-  describe('userService.updateUser', () => {
+  describe('UserService.getAllUsers', () => {
+    it('should return an empty list when there are no registered users', async () => {
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+
+      let users = await userService.getAllUsers()
+
+      expect(users).toEqual([])
+    })
+
+    it('should return an array with users when there are registered users', async () => {
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+
+      const userData = { cpf: '03372977033', name: 'John Doe' }
+      await userService.createUser(userData)
+      let users = await userService.getAllUsers()
+
+      expect(users).toEqual([userData])
+    })
+  })
+
+  describe('UserService.updateUser', () => {
     it('should return a NotFoundError exception when the user does not exist', async () => {
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
@@ -115,6 +89,32 @@ describe('[modules:users]: application -> UserService', () => {
       let updatedUser = await userService.updateUser(updatedUserData)
 
       expect(updatedUser).toEqual(updatedUserData)
+    })
+  })
+
+  describe('UserService.deleteUser', () => {
+    it('should return a NotFoundError exception when the cpf entered is not registered', async () => {
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+      const userCpf = '03372977033'
+
+      await expect(() => userService.deleteUser(userCpf)).rejects.toBeInstanceOf(NotFoundError)
+    })
+
+    it('should delete a user when it exists', async () => {
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+
+      const userData = { cpf: '03372977033', name: 'John Doe' }
+      await userService.createUser(userData)
+      let users = await userService.getAllUsers()
+
+      expect(users).toEqual([userData])
+
+      await userService.deleteUser(userData.cpf)
+      users = await userService.getAllUsers()
+
+      expect(users).toEqual([])
     })
   })
 })
