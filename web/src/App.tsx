@@ -1,10 +1,10 @@
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit"
+import DeleteIcon from "@mui/icons-material/Delete"
 
-import { Card } from "./components/card";
-import { GlobalStyle } from "./styles/global";
+import { Card } from "./components/card"
+import { GlobalStyle } from "./styles/global"
 
-function App() {
+export function App() {
   return (
     <>
       <GlobalStyle />
@@ -26,7 +26,5 @@ function App() {
         </Card.IconsContainer>
       </Card.Root>
     </>
-  );
+  )
 }
-
-export default App;

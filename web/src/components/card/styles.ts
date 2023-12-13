@@ -44,4 +44,13 @@ export const StyledCardSubTitle = styled.h3`
 export const StyledCardIconButton = styled.button`
   border: none;
   background-color: transparent;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
 `
