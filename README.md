@@ -88,7 +88,7 @@
     ```json
     {
         "id": "ce61d09d-4096-4407-b20b-ea3568c3342e",
-        "name": "user name",
+        "name": "new user name",
         "cpf": "30506980049",
         "created_at": "2023-12-13T13:17:28.849Z",
         "updated_at": "2023-12-13T13:59:16.452Z"
