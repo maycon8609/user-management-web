@@ -18,6 +18,7 @@ export const StyledCardContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-width: 200px;
 `
 
 export const StyledCardIconsContainer = styled.div`
@@ -35,6 +36,9 @@ export const StyledCardImage = styled.img`
 
 export const StyledCardTitle = styled.h2`
   font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 export const StyledCardSubTitle = styled.h3`
@@ -53,4 +57,12 @@ export const StyledCardIconButton = styled.button`
   &:active {
     opacity: 0.6;
   }
+`
+
+export const StyledCardInput = styled.input`
+  border: none;
+  border-radius: 2px;
+  padding: 2px;
+  color: #353b48;
+  max-width: 160px;
 `

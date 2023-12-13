@@ -2,7 +2,8 @@ import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   HTMLAttributes,
-  ImgHTMLAttributes
+  ImgHTMLAttributes,
+  InputHTMLAttributes
 } from "react"
 
 export type ICardRootProps = DetailedHTMLProps<
@@ -29,4 +30,9 @@ export type ICardSubTitle = ICardTitle
 export type ICardIconButton = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
+>
+
+export type ICardInput = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>, 
+  HTMLInputElement
 >
