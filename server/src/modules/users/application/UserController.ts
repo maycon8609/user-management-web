@@ -47,28 +47,6 @@ export class UserController {
     return response.status(statusCode.OK).json(createUser)
   }
 
-  async deleteUser(request: Request, response: Response): Promise<Response> {
-    const { cpf } = request.params
-
-    const normalizedCpf = returnNumericCharacters(cpf)
-
-    if (!isValidCpf(normalizedCpf)) {
-      throw new ConflictError(
-        'Invalid CPF. Please check your details.',
-        exceptionType.INVALID_CPF_EXCEPTION
-      )
-    }
-
-    await this.userService.deleteUser(normalizedCpf)
-    return response.status(statusCode.OK).json({ message: 'User successfully deleted.' })
-  }
-
-  // mudar para getAllUsers
-  async findAllUser(_request: Request, response: Response): Promise<Response> {
-    const listOfUser = await this.userService.findAllUser()
-    return response.status(statusCode.OK).json(listOfUser)
-  }
-
   async findUserByCpf(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params
 
@@ -83,6 +61,11 @@ export class UserController {
 
     const user = await this.userService.findUserByCpf(normalizedCpf)
     return response.status(statusCode.OK).json(user)
+  }
+
+  async getAllUsers(_request: Request, response: Response): Promise<Response> {
+    const listOfUser = await this.userService.getAllUsers()
+    return response.status(statusCode.OK).json(listOfUser)
   }
 
   async updateUser(request: Request, response: Response): Promise<Response> {
@@ -103,5 +86,21 @@ export class UserController {
     const user = new User({ cpf: normalizedCpf, name })
     const updatedUser = await this.userService.updateUser(user)
     return response.status(statusCode.OK).json(updatedUser)
+  }
+
+  async deleteUser(request: Request, response: Response): Promise<Response> {
+    const { cpf } = request.params
+
+    const normalizedCpf = returnNumericCharacters(cpf)
+
+    if (!isValidCpf(normalizedCpf)) {
+      throw new ConflictError(
+        'Invalid CPF. Please check your details.',
+        exceptionType.INVALID_CPF_EXCEPTION
+      )
+    }
+
+    await this.userService.deleteUser(normalizedCpf)
+    return response.status(statusCode.OK).json({ message: 'User successfully deleted.' })
   }
 }

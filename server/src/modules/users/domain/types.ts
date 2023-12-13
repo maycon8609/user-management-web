@@ -7,9 +7,9 @@ export interface IUser {
 }
 
 export interface IUserRepository {
-  delete(cpf: string): Promise<void>
-  findAll(): Promise<IUser[] | []>
-  findByCpf(cpf: string): Promise<IUser | null>
   create(user: IUser): Promise<IUser>
+  findByCpf(cpf: string): Promise<IUser | null>
+  getAll(): Promise<IUser[] | []>
   update(user: IUser): Promise<IUser>
+  delete(cpf: string): Promise<void>
 }

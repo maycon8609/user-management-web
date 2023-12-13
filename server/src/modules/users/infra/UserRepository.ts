@@ -11,18 +11,14 @@ export class UserRepository implements IUserRepository {
     return result.rows[0]
   }
 
-  async delete(cpf: string): Promise<void> {
-    await query('DELETE FROM users WHERE cpf = $1', [cpf])
-  }
-
-  async findAll(): Promise<IUser[] | []> {
-    const result = await query('SELECT * FROM users');
-    return result.rows
-  }
-
   async findByCpf(cpf: string): Promise<IUser | null> {
     const user = await query('SELECT * FROM users WHERE cpf = $1', [cpf])
     return user.rows[0]
+  }
+
+  async getAll(): Promise<IUser[] | []> {
+    const result = await query('SELECT * FROM users');
+    return result.rows
   }
 
   async update(user: IUser): Promise<IUser> {
@@ -33,4 +29,7 @@ export class UserRepository implements IUserRepository {
     return updatedUser.rows[0]
   }
 
+  async delete(cpf: string): Promise<void> {
+    await query('DELETE FROM users WHERE cpf = $1', [cpf])
+  }
 }

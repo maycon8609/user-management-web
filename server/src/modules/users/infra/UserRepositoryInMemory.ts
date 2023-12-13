@@ -8,18 +8,13 @@ export class UserRepositoryInMemory implements IUserRepository {
     return user
   }
 
-  async delete(cpf: string): Promise<void> {
-    const filteredUsers = this.users.filter(user => user.cpf !== cpf)
-    this.users = filteredUsers
-  }
-
-  async findAll(): Promise<IUser[] | []> {
-    return this.users
-  }
-
   async findByCpf(cpf: string): Promise<IUser | null> {
     const user = this.users.find(user => user.cpf === cpf)
     return user ?? null
+  }
+
+  async getAll(): Promise<IUser[] | []> {
+    return this.users
   }
 
   async update(user: IUser): Promise<IUser> {
@@ -30,5 +25,10 @@ export class UserRepositoryInMemory implements IUserRepository {
     ]
     this.users = updatedUsers
     return user
+  }
+
+  async delete(cpf: string): Promise<void> {
+    const filteredUsers = this.users.filter(user => user.cpf !== cpf)
+    this.users = filteredUsers
   }
 }

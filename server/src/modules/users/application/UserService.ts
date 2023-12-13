@@ -22,24 +22,6 @@ export class UserService implements IUserService {
     return createUser
   }
 
-  async deleteUser(cpf: string): Promise<void> {
-    const existentUser = await this.userRepository.findByCpf(cpf)
-
-    if (!existentUser) {
-      throw new NotFoundError(
-        'The cpf entered does not exist in the database, check your data and try again.',
-        exceptionType.NOT_FOUND_CPF_EXCEPTION
-      )
-    }
-
-    await this.userRepository.delete(cpf)
-  }
-
-  async findAllUser(): Promise<User[] | []> {
-    const listOfUser = await this.userRepository.findAll()
-    return listOfUser
-  }
-
   async findUserByCpf(cpf: string): Promise<IUser> {
     const existentUser = await this.userRepository.findByCpf(cpf)
 
@@ -51,6 +33,11 @@ export class UserService implements IUserService {
     }
 
     return existentUser
+  }
+
+  async getAllUsers(): Promise<User[] | []> {
+    const listOfUser = await this.userRepository.getAll()
+    return listOfUser
   }
 
   async updateUser(user: User): Promise<IUser> {
@@ -65,5 +52,18 @@ export class UserService implements IUserService {
 
     const updatedUser = await this.userRepository.update(user)
     return updatedUser
+  }
+
+  async deleteUser(cpf: string): Promise<void> {
+    const existentUser = await this.userRepository.findByCpf(cpf)
+
+    if (!existentUser) {
+      throw new NotFoundError(
+        'The cpf entered does not exist in the database, check your data and try again.',
+        exceptionType.NOT_FOUND_CPF_EXCEPTION
+      )
+    }
+
+    await this.userRepository.delete(cpf)
   }
 }
