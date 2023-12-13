@@ -14,9 +14,11 @@ import type { IUserService } from './types'
 export class UserController {
   constructor(private readonly userService: IUserService) { }
 
-  private async validateData(field: string): Promise<void> {
+  private async validateData(field: string, requiredFieldMessage?: string): Promise<void> {
+    const requiredMessageException = requiredFieldMessage ?? 'Mandatory fields were not provided.'
+
     if (!field) {
-      throw new RequiredField('Mandatory fields were not provided.')
+      throw new RequiredField(requiredMessageException)
     }
 
     if (typeof field !== 'string') {
@@ -27,8 +29,8 @@ export class UserController {
   async createUser(request: Request, response: Response): Promise<Response> {
     const { cpf, name } = request.body
 
-    await this.validateData(cpf)
-    await this.validateData(name)
+    await this.validateData(cpf, 'The cpf field is mandatory and was not provided, check and try again.')
+    await this.validateData(name, 'The name field is mandatory and was not provided, check and try again.')
 
     const normalizedCpf = returnNumericCharacters(cpf)
 
@@ -58,9 +60,10 @@ export class UserController {
     }
 
     await this.userService.deleteUser(normalizedCpf)
-    return response.status(statusCode.OK).send()
+    return response.status(statusCode.OK).json({ message: 'User successfully deleted.' })
   }
 
+  // mudar para getAllUsers
   async findAllUser(_request: Request, response: Response): Promise<Response> {
     const listOfUser = await this.userService.findAllUser()
     return response.status(statusCode.OK).json(listOfUser)
@@ -86,8 +89,7 @@ export class UserController {
     const { cpf } = request.params
     const { name } = request.body
 
-    await this.validateData(cpf)
-    await this.validateData(name)
+    await this.validateData(name, 'The name field is mandatory and was not provided, check and try again.')
 
     const normalizedCpf = returnNumericCharacters(cpf)
 
