@@ -64,88 +64,6 @@ describe('[modules:users]: application -> UserController', () => {
     })
   })
 
-  describe('UserController.deleteUser', () => {
-    it('should return a ConflictError exception when the cpf entered is invalid', async () => {
-      const request = { params: { cpf: '1234567890' } } as any as Request
-      const response = {} as Response
-
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-      const userController = new UserController(userService)
-
-      await expect(() => userController.deleteUser(request, response)).rejects.toBeInstanceOf(ConflictError)
-    })
-
-    it('should delete a user when it exists', async () => {
-      const requestBody = { cpf: '03372977033', name: 'John Doe' }
-      const request = { body: requestBody, params: { cpf: requestBody.cpf } } as any as Request
-      let statusCode = 0
-      let jsonResult: any
-      const response = {
-        status: (code: number) => {
-          statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
-        }
-      } as Response
-
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-      const userController = new UserController(userService)
-
-      await userController.createUser(request, response)
-      await userController.deleteUser(request, response)
-
-      expect(statusCode).toBe(200)
-      expect(jsonResult).toEqual({ message: 'User successfully deleted.' })
-    })
-  })
-
-  describe('UserController.findAllUser', () => {
-    it('should return an empty list when there are no registered users', async () => {
-      const request = {} as Request
-      let statusCode = 0
-      let jsonResult: any
-      const response = {
-        status: (code: number) => {
-          statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
-        }
-      } as Response
-
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-      const userController = new UserController(userService)
-
-      await userController.findAllUser(request, response)
-
-      expect(statusCode).toBe(200)
-      expect(jsonResult).toEqual([])
-    })
-
-    it('should return a list of users when they are registered', async () => {
-      const requestBody = { cpf: '03372977033', name: 'John Doe' }
-      const request = { body: requestBody } as Request
-      let statusCode = 0
-      let jsonResult: any
-      const response = {
-        status: (code: number) => {
-          statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
-        }
-      } as Response
-
-      const userRepository = new UserRepositoryInMemory()
-      const userService = new UserService(userRepository)
-      const userController = new UserController(userService)
-
-      await userController.createUser(request, response)
-      await userController.findAllUser(request, response)
-
-      expect(statusCode).toBe(200)
-      expect(jsonResult).toEqual([requestBody])
-    })
-  })
-
   describe('UserController.findUserByCpf', () => {
     it('should return a ConflictError exception when the cpf entered is invalid', async () => {
       const request = { params: { cpf: '1234567890' } } as any as Request
@@ -179,6 +97,52 @@ describe('[modules:users]: application -> UserController', () => {
 
       expect(statusCode).toBe(200)
       expect(jsonResult).toEqual(requestBody)
+    })
+  })
+
+  describe('UserController.getAllUsers', () => {
+    it('should return an empty list when there are no registered users', async () => {
+      const request = {} as Request
+      let statusCode = 0
+      let jsonResult: any
+      const response = {
+        status: (code: number) => {
+          statusCode = code
+          return { json: (data: any) => { jsonResult = data } }
+        }
+      } as Response
+
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+      const userController = new UserController(userService)
+
+      await userController.getAllUsers(request, response)
+
+      expect(statusCode).toBe(200)
+      expect(jsonResult).toEqual([])
+    })
+
+    it('should return a list of users when they are registered', async () => {
+      const requestBody = { cpf: '03372977033', name: 'John Doe' }
+      const request = { body: requestBody } as Request
+      let statusCode = 0
+      let jsonResult: any
+      const response = {
+        status: (code: number) => {
+          statusCode = code
+          return { json: (data: any) => { jsonResult = data } }
+        }
+      } as Response
+
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+      const userController = new UserController(userService)
+
+      await userController.createUser(request, response)
+      await userController.getAllUsers(request, response)
+
+      expect(statusCode).toBe(200)
+      expect(jsonResult).toEqual([requestBody])
     })
   })
 
@@ -229,6 +193,42 @@ describe('[modules:users]: application -> UserController', () => {
 
       expect(statusCode).toBe(200)
       expect(jsonResult).toEqual({ cpf, name: updatedName })
+    })
+  })
+
+  describe('UserController.deleteUser', () => {
+    it('should return a ConflictError exception when the cpf entered is invalid', async () => {
+      const request = { params: { cpf: '1234567890' } } as any as Request
+      const response = {} as Response
+
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+      const userController = new UserController(userService)
+
+      await expect(() => userController.deleteUser(request, response)).rejects.toBeInstanceOf(ConflictError)
+    })
+
+    it('should delete a user when it exists', async () => {
+      const requestBody = { cpf: '03372977033', name: 'John Doe' }
+      const request = { body: requestBody, params: { cpf: requestBody.cpf } } as any as Request
+      let statusCode = 0
+      let jsonResult: any
+      const response = {
+        status: (code: number) => {
+          statusCode = code
+          return { json: (data: any) => { jsonResult = data } }
+        }
+      } as Response
+
+      const userRepository = new UserRepositoryInMemory()
+      const userService = new UserService(userRepository)
+      const userController = new UserController(userService)
+
+      await userController.createUser(request, response)
+      await userController.deleteUser(request, response)
+
+      expect(statusCode).toBe(200)
+      expect(jsonResult).toEqual({ message: 'User successfully deleted.' })
     })
   })
 })
