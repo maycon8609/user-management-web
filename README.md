@@ -1,5 +1,10 @@
 # USER CONTROL - SERVER
-  Descrição
+  Aplicação para controles de usuários, os mesmos podem ser cadastrados com cpf e nome:
+  ```typeScript
+  { cpf: string, name: string }
+  ```
+  O cpf esta sendo usado como chave primaria, não sendo possível assim cadastrar dois usuários com o mesmo cpf.
+  A aplicação disponibilizar um **C.R.U.D**, mais detalhes na documentação abaixo.
 
 ## Execução do projeto
 1. Certifique-se de ter instalado.
@@ -7,22 +12,28 @@
     - [Docker](https://docs.docker.com/get-docker/): versão usada para desenvolvimento deste projeto **v24.0.7**.
     - [Docker Compose](https://docs.docker.com/compose/install/): versão usada para desenvolvimento deste projeto **1.29.2**.
 
-2. Clone este repositório.
+2. Clone este repositório:
     ```bash
     git clone git@github.com:maycon8609/user-control.git
     ```
 
-3. Instale as dependências.
+3. Instale as dependências:
     ```bash
-    cd sever
+    cd server
     npm install
     ```
-4. Iniciar o projeto.
+
+4. Iniciar o projeto:
     ```bash
     npm run start:docker
     ```
 
-5. Acesse a aplicação em http://localhost:3000.
+5. Na primeira execução se faz necessário o seguinte script para subir as migration criando assim a tabela de usuários:
+    ```bash
+    npm run migration:up
+    ```
+
+6. Acesse a aplicação em http://localhost:3000.
 
 ## Rotas
 **POST /user**
@@ -108,3 +119,18 @@
         "message": "User successfully deleted."
     }
     ```
+
+# USER CONTROL - WEB
+## Execução do projeto
+2. Instale as dependências:
+    ```bash
+    cd web
+    npm install
+    ```
+
+3. Iniciar o projeto:
+    ```bash
+    npm run dev
+    ```
+
+4. Acesse a aplicação em http://localhost:5173.
