@@ -4,6 +4,6 @@ export type IUser = {
   id: string
   name: string
   updated_at: string
-};
+}
 
-export type IUpdateUser = (newUserData: IUser) => void;
+export type IUpdateUser = (newUserData: IUser) => void

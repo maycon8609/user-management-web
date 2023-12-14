@@ -1,36 +1,36 @@
-import { FC, useState } from "react";
-import { Card } from "../Card";
+import { FC, useState } from "react"
+import { Card } from "../Card"
 import {
   StyledCreateUserCardButton,
   StyledCreateUserCardButtonContainer,
-} from "./styles";
-import type { ICreateUserCardProps, ICreateUserData } from "./types";
+} from "./styles"
+import type { ICreateUserCardProps, ICreateUserData } from "./types"
 
 export const CreateUserCard: FC<ICreateUserCardProps> = ({
   handleCancel,
-  handleConfirm,
+  handleConfirm
 }) => {
   const [user, setUser] = useState<ICreateUserData>({
     cpf: "",
-    name: "",
-  });
+    name: ""
+  })
 
   function handleCancelChange() {
-    if (handleCancel) handleCancel();
+    if (handleCancel) handleCancel()
 
     setUser({
       cpf: "",
-      name: "",
-    });
+      name: ""
+    })
   }
 
   function handleConfirmChange() {
-    handleConfirm(user);
+    handleConfirm(user)
 
     setUser({
       cpf: "",
-      name: "",
-    });
+      name: ""
+    })
   }
 
   return (
@@ -65,5 +65,5 @@ export const CreateUserCard: FC<ICreateUserCardProps> = ({
         </StyledCreateUserCardButton>
       </StyledCreateUserCardButtonContainer>
     </Card.Root>
-  );
-};
+  )
+}
