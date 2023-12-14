@@ -1,11 +1,7 @@
-type IUserData = {
-  cpf: string;
-  name: string;
-};
+import { IUser } from "../../types";
 
 export type IUserCardProps = {
-  cpf: string
   deleteUser: () => void
-  name: string
-  updateName: (user: IUserData) => void
+  updateUser: (user: IUser) => void
+  user: IUser
 }

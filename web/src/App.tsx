@@ -1,28 +1,11 @@
+import { FC, useCallback, useEffect, useState } from "react";
 import { UserCard } from "./components/UserCard";
-import { useCallback, useState } from "react";
+import { listAllUsers } from "./services/listAllUsers";
+import type { IUpdateUser, IUser } from "./types";
+import { StyledAppContainer } from "./styles";
 
-type IUserData = {
-  cpf: string;
-  name: string;
-};
-
-type IUpdateUser = (newUserData: IUserData) => void;
-
-export function App() {
-  const [userData, setUserData] = useState<IUserData[]>([
-    {
-      cpf: "111.111.111-11",
-      name: "Danilo 111.111.111-11",
-    },
-    {
-      cpf: "222.222.222-22",
-      name: "Leandro 222.222.222-22",
-    },
-    {
-      cpf: "333.333.333-33",
-      name: "Rayssa 333.333.333-33",
-    },
-  ]);
+export const App: FC = () => {
+  const [userData, setUserData] = useState<IUser[]>([]);
 
   const updateUser: IUpdateUser = useCallback(
     (newUserData) => {
@@ -31,25 +14,32 @@ export function App() {
       );
 
       setUserData([...filteredUserData, newUserData]);
-
-      console.log({ filteredUserData, newUserData });
     },
     [userData]
   );
 
+  const fetchData = useCallback(async (): Promise<void> => {
+    const { data } = await listAllUsers<IUser[]>();
+
+    setUserData(data);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
-    <>
-      {userData.map((user, index) => {
+    <StyledAppContainer>
+      {userData.map((user) => {
         return (
           <UserCard
-            key={index}
-            cpf={user.cpf}
+            key={user.cpf}
             deleteUser={() => console.log("apagou...")}
-            name={user.name}
-            updateName={(newUserData) => updateUser(newUserData)}
+            user={user}
+            updateUser={(user) => updateUser(user)}
           />
         );
       })}
-    </>
+    </StyledAppContainer>
   );
-}
+};
