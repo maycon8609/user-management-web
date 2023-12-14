@@ -8,18 +8,12 @@ export class Users1702066779919 implements MigrationInterface {
         name: 'users',
         columns: [
           {
-            name: 'id',
-            type: 'uuid',
+            name: 'cpf',
             isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()'
-          },
-          {
-            name: 'name',
             type: 'varchar'
           },
           {
-            name: 'cpf',
+            name: 'name',
             type: 'varchar'
           },
           {

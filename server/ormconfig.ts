@@ -4,9 +4,9 @@ const dataSource = new DataSource({
   type: "postgres",
   host: "localhost",
   port: 5432,
-  username: "myuser",
-  password: "mypassword",
-  database: "mydatabase",
+  username: "postgres_user",
+  password: "postgres_password",
+  database: "postgres_database_name",
   entities: [
     "./src/modules/**/infra/typeorm/entities/*.ts"
   ],

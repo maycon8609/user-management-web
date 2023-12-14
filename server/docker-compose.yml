@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: postgres_database_name
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
     ports:
       - "5432:5432"
 
@@ -17,9 +17,9 @@ services:
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_USER: myuser
-      DB_PASSWORD: mypassword
-      DB_NAME: mydatabase
+      DB_USER: postgres_user
+      DB_PASSWORD: postgres_password
+      DB_NAME: postgres_database_name
     command: npm run dev
     ports:
       - "3000:3000"

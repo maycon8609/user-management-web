@@ -1,8 +1,7 @@
 export type IUser = {
   cpf: string
-  created_at: string
-  id: string
   name: string
+  created_at: string
   updated_at: string
 }
 
