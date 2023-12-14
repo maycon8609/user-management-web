@@ -6,6 +6,7 @@ import { UserCard } from "./components/UserCard"
 import { createUserService } from "./services/createUser"
 import { deleteUserService } from "./services/deleteUser"
 import { getAllUsersService } from "./services/getAllUsers"
+import { updateUserService } from './services/updateUser'
 
 import { StyledAppContainer } from "./styles"
 
@@ -15,12 +16,14 @@ export const App: FC = () => {
   const [userData, setUserData] = useState<IUser[]>([])
 
   const updateUser: IUpdateUser = useCallback(
-    (newUserData) => {
+    async (newUserData) => {
+      const { data } = await updateUserService<IUser>(newUserData)
+
       const filteredUserData = userData.filter(
         (user) => user.cpf !== newUserData.cpf
       )
 
-      setUserData([...filteredUserData, newUserData])
+      setUserData([...filteredUserData, data])
     },
     [userData]
   )
@@ -38,7 +41,6 @@ export const App: FC = () => {
   }
 
   async function handleDeleteUser(cpf: string) {
-    console.log({cpf})
     await deleteUserService(cpf)
     await fetchData()
   }
