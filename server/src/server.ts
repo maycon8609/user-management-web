@@ -7,6 +7,12 @@ import { useRouter } from '@users/userModule'
 const app = express()
 const PORT = 3000
 
+app.use((_req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.use(express.json())
 app.use("/", useRouter.router)
 app.use(errorMiddleware)
