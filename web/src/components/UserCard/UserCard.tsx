@@ -63,7 +63,7 @@ export const UserCard: FC<IUserCardProps> = ({
         <Card.IconButton onClick={() => setIsEditing(true)}>
           <EditIcon style={{ color: "#fff" }} />
         </Card.IconButton>
-        <Card.IconButton onClick={() => deleteUser()}>
+        <Card.IconButton onClick={() => deleteUser(userState.cpf)}>
           <DeleteIcon style={{ color: "#fff" }} />
         </Card.IconButton>
       </>

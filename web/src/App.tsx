@@ -1,40 +1,51 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import { UserCard } from "./components/UserCard";
-import { getAllUsersService } from "./services/getAllUsers";
-import { StyledAppContainer } from "./styles";
-import { CreateUserCard } from "./components/CreateUserCard";
-import type { IUpdateUser, IUser } from "./types";
-import { createUserService } from "./services/createUser";
+import { FC, useCallback, useEffect, useState } from "react"
+
+import { CreateUserCard } from "./components/CreateUserCard"
+import { UserCard } from "./components/UserCard"
+
+import { createUserService } from "./services/createUser"
+import { deleteUserService } from "./services/deleteUser"
+import { getAllUsersService } from "./services/getAllUsers"
+
+import { StyledAppContainer } from "./styles"
+
+import type { IUpdateUser, IUser } from "./types"
 
 export const App: FC = () => {
-  const [userData, setUserData] = useState<IUser[]>([]);
+  const [userData, setUserData] = useState<IUser[]>([])
 
   const updateUser: IUpdateUser = useCallback(
     (newUserData) => {
       const filteredUserData = userData.filter(
         (user) => user.cpf !== newUserData.cpf
-      );
+      )
 
-      setUserData([...filteredUserData, newUserData]);
+      setUserData([...filteredUserData, newUserData])
     },
     [userData]
-  );
+  )
 
   const fetchData = useCallback(async (): Promise<void> => {
-    const { data } = await getAllUsersService<IUser[]>();
+    const { data } = await getAllUsersService<IUser[]>()
 
-    setUserData(data);
-  }, []);
+    setUserData(data)
+  }, [])
 
   async function handleCreateUser(user: { cpf: string, name: string }) {
-    const { data } = await createUserService<IUser>(user);
+    const { data } = await createUserService<IUser>(user)
 
     setUserData([...userData, data])
   }
 
+  async function handleDeleteUser(cpf: string) {
+    console.log({cpf})
+    await deleteUserService(cpf)
+    await fetchData()
+  }
+
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    fetchData()
+  }, [fetchData])
 
   return (
     <StyledAppContainer>
@@ -43,12 +54,12 @@ export const App: FC = () => {
         return (
           <UserCard
             key={user.cpf}
-            deleteUser={() => console.log("apagou...")}
+            deleteUser={handleDeleteUser}
             user={user}
-            updateUser={(user) => updateUser(user)}
+            updateUser={updateUser}
           />
-        );
+        )
       })}
     </StyledAppContainer>
-  );
-};
+  )
+}

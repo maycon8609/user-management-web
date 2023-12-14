@@ -1,7 +1,7 @@
 import { IUser } from "../../types";
 
 export type IUserCardProps = {
-  deleteUser: () => void
+  deleteUser: (cpf: string) => void
   updateUser: (user: IUser) => void
   user: IUser
 }
