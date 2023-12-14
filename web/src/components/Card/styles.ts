@@ -11,7 +11,7 @@ export const StyledCardContainer = styled.div`
   border-radius: 4px;
   padding: 8px;
 
-  width: 300px;
+  width: 400px;
 `
 
 export const StyledCardContentContainer = styled.div`
@@ -19,7 +19,7 @@ export const StyledCardContentContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   flex: 1;
-  max-width: 160px;
+  max-width: 260px;
 `
 
 export const StyledCardIconsContainer = styled.div`
@@ -68,5 +68,5 @@ export const StyledCardInput = styled.input`
   border-radius: 2px;
   padding: 2px;
   color: #353b48;
-  max-width: 160px;
+  max-width: 260px;
 `
