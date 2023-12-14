@@ -1,8 +1,10 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { UserCard } from "./components/UserCard";
-import { listAllUsers } from "./services/listAllUsers";
-import type { IUpdateUser, IUser } from "./types";
+import { getAllUsersService } from "./services/getAllUsers";
 import { StyledAppContainer } from "./styles";
+import { CreateUserCard } from "./components/CreateUserCard";
+import type { IUpdateUser, IUser } from "./types";
+import { createUserService } from "./services/createUser";
 
 export const App: FC = () => {
   const [userData, setUserData] = useState<IUser[]>([]);
@@ -19,10 +21,16 @@ export const App: FC = () => {
   );
 
   const fetchData = useCallback(async (): Promise<void> => {
-    const { data } = await listAllUsers<IUser[]>();
+    const { data } = await getAllUsersService<IUser[]>();
 
     setUserData(data);
   }, []);
+
+  async function handleCreateUser(user: { cpf: string, name: string }) {
+    const { data } = await createUserService<IUser>(user);
+
+    setUserData([...userData, data])
+  }
 
   useEffect(() => {
     fetchData();
@@ -30,6 +38,7 @@ export const App: FC = () => {
 
   return (
     <StyledAppContainer>
+      <CreateUserCard handleConfirm={(user) => handleCreateUser(user)} />
       {userData.map((user) => {
         return (
           <UserCard

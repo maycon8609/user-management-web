@@ -1,5 +1,5 @@
 import { Api } from '../api'
 
-export function listAllUsers<T>() {
+export function getAllUsersService<T>() {
   return Api.get<T>('/user')
 }
