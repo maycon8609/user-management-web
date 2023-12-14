@@ -17,13 +17,15 @@ export const App: FC = () => {
 
   const updateUser: IUpdateUser = useCallback(
     async (newUserData) => {
-      const { data } = await updateUserService<IUser>(newUserData)
-
-      const filteredUserData = userData.filter(
-        (user) => user.cpf !== newUserData.cpf
-      )
-
-      setUserData([...filteredUserData, data])
+      if (newUserData.cpf && newUserData.name) {
+        const { data } = await updateUserService<IUser>(newUserData)
+  
+        const filteredUserData = userData.filter(
+          (user) => user.cpf !== newUserData.cpf
+        )
+  
+        setUserData([...filteredUserData, data])
+      }
     },
     [userData]
   )
@@ -35,9 +37,11 @@ export const App: FC = () => {
   }, [])
 
   async function handleCreateUser(user: { cpf: string, name: string }) {
-    const { data } = await createUserService<IUser>(user)
-
-    setUserData([...userData, data])
+    if (user.cpf && user.name) {
+      const { data } = await createUserService<IUser>(user)
+  
+      setUserData([...userData, data])
+    }
   }
 
   async function handleDeleteUser(cpf: string) {
