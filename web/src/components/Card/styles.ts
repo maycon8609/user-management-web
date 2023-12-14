@@ -11,14 +11,15 @@ export const StyledCardContainer = styled.div`
   border-radius: 4px;
   padding: 8px;
 
-  width: max-content;
+  width: 300px;
 `
 
 export const StyledCardContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-width: 200px;
+  flex: 1;
+  max-width: 160px;
 `
 
 export const StyledCardIconsContainer = styled.div`
@@ -43,6 +44,9 @@ export const StyledCardTitle = styled.h2`
 
 export const StyledCardSubTitle = styled.h3`
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 export const StyledCardIconButton = styled.button`

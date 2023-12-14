@@ -38,7 +38,7 @@ export const UserCard: FC<IUserCardProps> = ({
         <Card.IconButton
           onClick={() => {
             setIsEditing(false);
-            updateName(nameState);
+            updateName({ cpf, name: nameState });
           }}
         >
           <CheckIcon style={{ color: "#fff" }} />
@@ -56,7 +56,7 @@ export const UserCard: FC<IUserCardProps> = ({
         </Card.IconButton>
       </>
     );
-  }, [deleteUser, isEditing, nameState, updateName]);
+  }, [cpf, deleteUser, isEditing, nameState, updateName]);
 
   return (
     <Card.Root>

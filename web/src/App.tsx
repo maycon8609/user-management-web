@@ -6,53 +6,50 @@ type IUserData = {
   name: string;
 };
 
-type IUpdateUser = (
-  targetUser: IUserData,
-  newUserData: { name: string }
-) => void;
+type IUpdateUser = (newUserData: IUserData) => void;
 
 export function App() {
   const [userData, setUserData] = useState<IUserData[]>([
     {
-      cpf: "123.456.789-01",
-      name: "maycon da silva sousa",
+      cpf: "111.111.111-11",
+      name: "Danilo 111.111.111-11",
     },
     {
-      cpf: "123.456.789-02",
-      name: "maycon silva",
+      cpf: "222.222.222-22",
+      name: "Leandro 222.222.222-22",
     },
     {
-      cpf: "123.456.789-03",
-      name: "maycon",
+      cpf: "333.333.333-33",
+      name: "Rayssa 333.333.333-33",
     },
   ]);
 
   const updateUser: IUpdateUser = useCallback(
-    (targetUser, newUserData) => {
+    (newUserData) => {
       const filteredUserData = userData.filter(
-        (user) => user.cpf !== targetUser.cpf
+        (user) => user.cpf !== newUserData.cpf
       );
-      const updatedUserData: IUserData = {
-        cpf: targetUser.cpf,
-        name: newUserData.name,
-      };
 
-      setUserData([...filteredUserData, updatedUserData]);
+      setUserData([...filteredUserData, newUserData]);
+
+      console.log({ filteredUserData, newUserData });
     },
     [userData]
   );
 
   return (
     <>
-      {userData.map((user, key) => (
-        <UserCard
-          key={key}
-          cpf={user.cpf}
-          deleteUser={() => console.log("apagou...")}
-          name={user.name}
-          updateName={(updatedName) => updateUser(user, { name: updatedName })}
-        />
-      ))}
+      {userData.map((user, index) => {
+        return (
+          <UserCard
+            key={index}
+            cpf={user.cpf}
+            deleteUser={() => console.log("apagou...")}
+            name={user.name}
+            updateName={(newUserData) => updateUser(newUserData)}
+          />
+        );
+      })}
     </>
   );
 }
