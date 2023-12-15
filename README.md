@@ -23,19 +23,24 @@
     npm install
     ```
 
-4. Iniciar o projeto:
+4. Para executar os testes:
+    ```bash
+    npm run test
+    ```
+
+5. Iniciar o projeto:
     ```bash
     npm run start:docker
     ```
 
-5. Na primeira execução se faz necessário o seguinte script para subir as migration criando assim a tabela de usuários:
+6. Na primeira execução se faz necessário o seguinte script para subir as migration criando assim a tabela de usuários:
     ```bash
     npm run migration:up
     ```
 
-6. Acesse a aplicação em http://localhost:3000.
+7. Acesse a aplicação em http://localhost:3000.
 
-7. Site para [gerar cpf](https://www.4devs.com.br/gerador_de_cpf) valido para testes.
+8. Site para [gerar cpf](https://www.4devs.com.br/gerador_de_cpf) valido para testes.
 
 ## Rotas
 **POST /user**
