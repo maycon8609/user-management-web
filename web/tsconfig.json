@@ -7,12 +7,6 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "rootDir": "src",
-    "paths": {
-      "@/*": ["./*"],
-      "@api": ["api"],
-      "@components/*": ["components/*"],
-      "@services/*": ["services/*"]
-    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

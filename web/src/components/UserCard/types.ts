@@ -1,4 +1,4 @@
-import { IUser } from "@/types"
+import { IUser } from "../../types"
 
 export type IUserCardProps = {
   deleteUser: (cpf: string) => void

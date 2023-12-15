@@ -35,6 +35,8 @@
 
 6. Acesse a aplicação em http://localhost:3000.
 
+7. Site para [gerar cpf](https://www.4devs.com.br/gerador_de_cpf) valido para testes.
+
 ## Rotas
 **POST /user**
 - Cria um novo usuário.
