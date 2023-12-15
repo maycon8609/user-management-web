@@ -5,6 +5,14 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": "src",
+    "rootDir": "src",
+    "paths": {
+      "@/*": ["./*"],
+      "@api": ["api"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

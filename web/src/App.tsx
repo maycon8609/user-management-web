@@ -1,12 +1,12 @@
 import { FC, useCallback, useEffect, useState } from "react"
 
-import { CreateUserCard } from "./components/CreateUserCard"
-import { UserCard } from "./components/UserCard"
+import { CreateUserCard } from "@components/CreateUserCard"
+import { UserCard } from "@components/UserCard"
 
-import { createUserService } from "./services/createUser"
-import { deleteUserService } from "./services/deleteUser"
-import { getAllUsersService } from "./services/getAllUsers"
-import { updateUserService } from './services/updateUser'
+import { createUserService } from "@services/createUser"
+import { deleteUserService } from "@services/deleteUser"
+import { getAllUsersService } from "@services/getAllUsers"
+import { updateUserService } from '@services/updateUser'
 
 import { StyledAppContainer } from "./styles"
 
