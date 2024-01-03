@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/maycon8609/user-control/compare/v1.0.0...v1.1.0) (2024-01-03)
+
+
+### Features
+
+* added and configure husky ([e803722](https://github.com/maycon8609/user-control/commit/e803722f5292178a59c13c60cda305f59a658e00))
+* added and configure husky ([555d9eb](https://github.com/maycon8609/user-control/commit/555d9ebbe76c9e40a9bb9a37ee1223fd352ac59a))
+
 # 1.0.0 (2024-01-03)
 
 
