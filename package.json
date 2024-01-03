@@ -4,14 +4,19 @@
   "description": "Aplicação para controles de usuários, os mesmos podem ser cadastrados com cpf e nome.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pre-push": "echo \"pre-push script\" && exit 1",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "semantic-release": "^22.0.12"
   }
 }
