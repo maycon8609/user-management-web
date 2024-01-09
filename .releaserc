@@ -2,7 +2,7 @@
   "branches": [
     "main"
   ],
-  "repositoryUrl": "git@github.com:maycon8609/user-control.git",
+  "repositoryUrl": "git@github.com:maycon8609/user-management-web.git",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
