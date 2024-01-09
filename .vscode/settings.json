@@ -10,8 +10,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "html",
-    "mdx",
-    "markdown"
+    "html"
   ]
 }
